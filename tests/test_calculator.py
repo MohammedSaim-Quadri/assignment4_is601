@@ -36,10 +36,12 @@ Usage:
     <operation> <number1> <number2>
     - Perform a calculation with the specified operation and two numbers.
     - Supported operations:
-        add       : Adds two numbers.
-        subtract  : Subtracts the second number from the first.
-        multiply  : Multiplies two numbers.
-        divide    : Divides the first number by the second.
+        add         : Adds two numbers.
+        subtract    : Subtracts the second number from the first.
+        multiply    : Multiplies two numbers.
+        divide      : Divides the first number by the second.
+        modulo      : Calculates the remainder when the first number is divided by the second.
+        square_root : Calculates the square root of the first number (second number is ignored).
 
 Special Commands:
     help      : Display this help message.
@@ -51,7 +53,13 @@ Examples:
     subtract 15.5 3.2
     multiply 7 8
     divide 20 4
-"""
+    modulo 10 3
+    square_root 9 0
+
+Notes:
+    - For modulo operation: Cannot use zero as the divisor (second number).
+    - For square_root operation: Cannot use negative numbers. The second number is ignored but must be provided.
+    """
     # Remove leading/trailing whitespace for comparison
     assert captured.out.strip() == expected_output.strip()
 
