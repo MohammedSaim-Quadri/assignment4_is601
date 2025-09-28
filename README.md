@@ -1,17 +1,17 @@
 # Python Command-Line Calculator
 
-A robust command-line calculator application built in Python.  
-This project demonstrates best practices in software development, including a **REPL interface**, **Object-Oriented Programming (OOP)**, **input validation**, comprehensive testing with **pytest**, and a **CI/CD pipeline** using GitHub Actions.
+A robust command-line calculator application built in Python. This project demonstrates best practices in software development, including a REPL interface, Object-Oriented Programming (OOP), input validation, comprehensive testing with pytest, and a CI/CD pipeline using GitHub Actions.
 
 ---
 
 ## ✨ Features
 
 - **REPL Interface**: A Read-Eval-Print Loop for continuous user interaction.  
-- **Object-Oriented**: Core logic is encapsulated within an `Operations` class.  
-- **Arithmetic Operations**: Supports Addition, Subtraction, Multiplication, and Division.  
+- **Object-Oriented**: Utilizes a factory pattern and dedicated classes for each calculation, promoting modularity and extensibility.  
+- **Arithmetic Operations**: Supports Addition, Subtraction, Multiplication, Division, Power, Modulo, and Square Root.  
+- **Calculation History**: View all previous calculations from the current session using the `history` command.  
 - **Input Validation**: Gracefully handles non-numeric inputs and invalid operation choices.  
-- **Error Handling**: Specifically handles division-by-zero errors.  
+- **Error Handling**: Handles division-by-zero errors and invalid inputs for square root and modulo operations.  
 - **Well-Tested**: Achieves 100% test coverage with unit and parameterized tests.  
 - **CI Integrated**: Uses GitHub Actions to automatically run tests and verify coverage on every push.  
 
@@ -22,26 +22,28 @@ This project demonstrates best practices in software development, including a **
 ```bash
 .
 ├── .github/
-│ └── workflows/
-│ └── tests.yml # GitHub Actions workflow configuration
+│   └── workflows/
+│       └── tests.yml      # GitHub Actions workflow configuration
 ├── app/
-│ ├── init.py
-│ ├── calculator/
-│ │ └── init.py # Main application logic (REPL)
-│ └── operations/
-│ └── init.py # Core arithmetic functions (Operations class)
+│   ├── __init__.py
+│   ├── calculation/
+│   │   └── __init__.py    # Calculation classes and factory pattern
+│   ├── calculator/
+│   │   └── __init__.py    # Main application logic (REPL)
+│   └── operation/
+│       └── __init__.py    # Core arithmetic functions (Operation class)
 ├── tests/
-│ ├── init.py
-│ ├── conftest.py
-│ ├── test_calculator.py
-│ └── test_operations.py
-├── .coveragerc # Coverage tool configuration
-├── .gitignore
-├── LICENSE # MIT License file
-├── main.py # Main entry point for the application
-├── pytest.ini # Pytest configuration file
-└── requirements.txt # Project dependencies
-```
+│   ├── __init__.py
+│   ├── conftest.py
+│   ├── test_calculation.py
+│   ├── test_calculator.py
+│   └── test_operations.py
+├── .coveragerc            # Coverage tool configuration
+├── LICENSE                # MIT License file
+├── main.py                # Main entry point for the application
+├── pytest.ini             # Pytest configuration file
+└── requirements.txt       # Project dependencies
+
 
 ---
 
@@ -103,6 +105,49 @@ python main.py
 ```
 
 The application will start, and you can follow the on-screen prompts to perform calculations.
+
+---
+## Usage
+
+Enter commands in the format:
+```bash
+<operation> <number1> <number2>
+```
+Supported Operations
+
+- add: Adds two numbers.
+- subtract: Subtracts the second number from the first.
+- multiply: Multiplies two numbers.
+- divide: Divides the first number by the second.
+- modulo: Calculates the remainder of the first number divided by the second.
+- square_root: Calculates the square root of the first number (the second number is ignored but required).
+
+Special Commands
+
+- help: Display the help message.
+- history: Show the history of calculations for the current session.
+- exit: Exit the calculator.
+
+## Examples
+```bash
+>> add 10 5
+Result: AddCalculation: 10.0 Add 5.0 = 15.0
+
+>> subtract 15.5 3.2
+Result: SubtractCalculation: 15.5 Subtract 3.2 = 12.3
+
+>> modulo 10 3
+Result: ModuloCalculation: 10.0 Modulo 3.0 = 1.0
+
+>> square_root 9 0
+Result: SquareRootCalculation: 9.0 SquareRoot 0.0 = 3.0
+
+>> history
+Calculation History:
+1. AddCalculation: 10.0 Add 5.0 = 15.0
+2. SubtractCalculation: 15.5 Subtract 3.2 = 12.3
+3. ModuloCalculation: 10.0 Modulo 3.0 = 1.0
+```
 
 ---
 ## ✅ Running Tests
