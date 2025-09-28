@@ -43,7 +43,7 @@ A robust command-line calculator application built in Python. This project demon
 ├── main.py                # Main entry point for the application
 ├── pytest.ini             # Pytest configuration file
 └── requirements.txt       # Project dependencies
-
+```
 
 ---
 
